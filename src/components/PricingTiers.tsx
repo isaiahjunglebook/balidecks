@@ -1,31 +1,29 @@
-import { formatUsd, nightRateCents, PRICING } from "@/lib/pricing";
+import { formatUsd, PRICING } from "@/lib/pricing";
 
 export default function PricingTiers() {
-  const standard = formatUsd(nightRateCents("standard"));
-  const offpeak = formatUsd(nightRateCents("offpeak"));
-  const prime = formatUsd(nightRateCents("prime"));
+  const nightly = formatUsd(PRICING.baseNightlyCents);
   const weekly = formatUsd(PRICING.weeklyCents);
   const monthly = formatUsd(PRICING.monthlyCents);
 
   const tiers = [
     {
       label: "Nightly",
-      price: standard,
+      price: nightly,
       per: "per night",
-      note: `Off-peak weekdays ${offpeak}. Peak nights — Friday & Saturday in high season — ${prime}.`,
+      note: "One flat rate, any night of the year. Delivery, install and an on-site tech included.",
     },
     {
       label: "Weekly",
       price: weekly,
       per: "7 nights",
       highlight: true,
-      note: "Around $179 a night — two nights free versus the nightly rate. Prepaid, one villa.",
+      note: "Around $214 a night — well under half the nightly rate. Prepaid, one villa.",
     },
     {
       label: "Monthly",
       price: monthly,
       per: "30 nights",
-      note: "Around $117 a night for the full residency. Prepaid, one location.",
+      note: "Around $133 a night for the full residency. Prepaid, one location.",
     },
   ];
 
@@ -60,9 +58,8 @@ export default function PricingTiers() {
       </div>
       <p className="mt-4 text-xs leading-relaxed text-white/40">
         Every booking includes delivery, professional install and an on-site
-        tech. Peak nights are marked with a gold dot on the calendar. Lights
-        &amp; speaker packages quoted separately. Final price confirmed by the
-        owner.
+        tech. Lights &amp; speaker packages quoted separately. Final price
+        confirmed by the owner.
       </p>
     </section>
   );

@@ -275,23 +275,3 @@ body::before {
   text-decoration-color: rgba(255, 255, 255, 0.45);
   color: rgba(255, 255, 255, 0.55);
 }
-
-/* Peak-rate nights: a small gold tick under the date. */
-.rdp-root.rdp-root .rdp-prime:not(.rdp-disabled) .rdp-day_button {
-  position: relative;
-}
-.rdp-root.rdp-root .rdp-prime:not(.rdp-disabled) .rdp-day_button::after {
-  content: "";
-  position: absolute;
-  bottom: 0.3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0.22rem;
-  height: 0.22rem;
-  border-radius: 9999px;
-  background: rgba(232, 194, 106, 0.85);
-}
-.rdp-root.rdp-root .rdp-range_start .rdp-day_button::after,
-.rdp-root.rdp-root .rdp-range_end .rdp-day_button::after {
-  background: rgba(34, 24, 3, 0.7);
-}

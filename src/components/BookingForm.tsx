@@ -4,12 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DayPicker, type DateRange } from "react-day-picker";
 import "react-day-picker/style.css";
-import {
-  classifyNight,
-  estimatePrice,
-  formatUsd,
-  LINE_LABELS,
-} from "@/lib/pricing";
+import { estimatePrice, formatUsd, LINE_LABELS } from "@/lib/pricing";
 import { toDateString, fromDateString } from "@/lib/dates";
 
 interface BlockedRange {
@@ -107,24 +102,15 @@ export default function BookingForm() {
             selected={range}
             onSelect={setRange}
             disabled={disabledMatchers}
-            modifiers={{
-              booked: bookedMatchers,
-              prime: (date) => classifyNight(toDateString(date)) === "prime",
-            }}
-            modifiersClassNames={{ booked: "rdp-booked", prime: "rdp-prime" }}
+            modifiers={{ booked: bookedMatchers }}
+            modifiersClassNames={{ booked: "rdp-booked" }}
             excludeDisabled
             min={1}
             numberOfMonths={1}
           />
-          <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 border-t border-white/8 pt-3 text-[11px] text-white/40">
-            <span className="flex items-center gap-1.5">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold/85" />
-              peak rate
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="line-through">15</span>
-              booked
-            </span>
+          <div className="mt-3 flex items-center gap-1.5 border-t border-white/8 pt-3 text-[11px] text-white/40">
+            <span className="line-through">15</span>
+            booked
           </div>
         </div>
 

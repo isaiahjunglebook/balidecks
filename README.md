@@ -5,12 +5,11 @@ Bali (2× Pioneer CDJ-3000 + DJM-A9, monitors, and cables) — delivered, set up
 and installed. Clients view live availability and request dates; the owner
 approves or declines each request from a private admin dashboard.
 
-- **Pricing:** $250/night base with date multipliers — peak Fri/Sat in high
-  season $437.50 (1.75×), low-season weekdays $200 (0.8×) — plus duration
-  packages: $1,250/week (7 nights) · $3,500/month (30 nights). Prime nights
-  inside a package add the prime premium (the framework's guardrail). $1,500
-  refundable deposit. All knobs live in `PRICING` in `src/lib/pricing.ts`;
-  raise the base +20% every 5 completed bookings (the ratchet).
+- **Pricing:** flat $350/night, any night of the year, plus duration
+  packages: $1,500/week (7 nights) · $4,000/month (30 nights). A stay is
+  never charged more than a longer package that covers it. $2,500 refundable
+  deposit. All knobs live in `PRICING` in `src/lib/pricing.ts`; raise the
+  base +20% every 5 completed bookings (the ratchet).
 - **Payment:** arranged offline — no card processing on the site.
 - **Access:** one shared password for clients + a separate admin password for the owner.
 
