@@ -19,7 +19,7 @@ export default function PortalHome() {
       </header>
 
       <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/60">
-        A complete pro DJ setup — 2× Pioneer CDJ-3000 and a DJM-A9 — delivered,
+        A complete pro DJ setup — 2× Pioneer CDJ-3000X and a DJM-A9 — delivered,
         installed, and run by an on-site tech at your villa in Bali.
       </p>
 

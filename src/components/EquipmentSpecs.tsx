@@ -2,7 +2,7 @@ import { formatUsd, DEPOSIT_CENTS } from "@/lib/pricing";
 
 const GEAR = [
   {
-    name: "2× Pioneer CDJ-3000",
+    name: "2× Pioneer CDJ-3000X",
     detail: "Flagship pro players — the industry-standard club decks.",
   },
   {

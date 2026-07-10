@@ -1,7 +1,7 @@
 # BaliDecks — Private DJ Rental Booking Portal
 
 A private, password-gated booking portal for renting a complete pro DJ setup in
-Bali (2× Pioneer CDJ-3000 + DJM-A9, monitors, and cables) — delivered, set up,
+Bali (2× Pioneer CDJ-3000X + DJM-A9, monitors, and cables) — delivered, set up,
 and installed. Clients view live availability and request dates; the owner
 approves or declines each request from a private admin dashboard.
 
