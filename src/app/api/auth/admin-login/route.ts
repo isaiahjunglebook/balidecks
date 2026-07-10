@@ -3,6 +3,7 @@ import {
   passwordMatches,
   signSession,
   cookieOptions,
+  adminPassword,
   ADMIN_COOKIE,
 } from "@/lib/auth";
 
@@ -15,7 +16,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
-  const ok = await passwordMatches(password, process.env.ADMIN_PASSWORD);
+  const ok = await passwordMatches(password, adminPassword());
   if (!ok) {
     return NextResponse.json({ error: "Incorrect password" }, { status: 401 });
   }

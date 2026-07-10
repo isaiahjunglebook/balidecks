@@ -11,12 +11,28 @@ export const ADMIN_COOKIE = "bali_admin";
 
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 30; // 30 days
 
+// Generic default password used for BOTH the client portal and the admin login
+// for now, so the app works immediately without any env setup. Override in
+// production by setting CLIENT_PASSWORD / ADMIN_PASSWORD (and SESSION_SECRET) —
+// a repo-committed password is not secure long-term.
+export const DEFAULT_PASSWORD = "balidecks2026";
+const DEFAULT_SESSION_SECRET =
+  "balidecks-default-session-secret-change-me-in-production";
+
+export function clientPassword(): string {
+  return process.env.CLIENT_PASSWORD || DEFAULT_PASSWORD;
+}
+
+export function adminPassword(): string {
+  return process.env.ADMIN_PASSWORD || DEFAULT_PASSWORD;
+}
+
 function getSecret(): Uint8Array {
   const secret = process.env.SESSION_SECRET;
-  if (!secret || secret.length < 16) {
-    throw new Error("SESSION_SECRET is not set or too short");
+  if (secret && secret.length < 16) {
+    throw new Error("SESSION_SECRET is set but too short (min 16 chars)");
   }
-  return new TextEncoder().encode(secret);
+  return new TextEncoder().encode(secret || DEFAULT_SESSION_SECRET);
 }
 
 export async function signSession(role: Role): Promise<string> {
