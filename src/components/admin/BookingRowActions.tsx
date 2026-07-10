@@ -39,7 +39,7 @@ export default function BookingRowActions({
   }
 
   const btn =
-    "rounded-md px-3 py-1.5 text-xs font-medium transition disabled:opacity-40";
+    "rounded-full px-3.5 py-1.5 text-xs font-medium transition disabled:opacity-40";
 
   return (
     <div className="flex flex-col items-end gap-1">
@@ -49,14 +49,14 @@ export default function BookingRowActions({
             <button
               onClick={() => act("confirm")}
               disabled={busy !== null}
-              className={`${btn} bg-emerald-500/90 text-black hover:bg-emerald-400`}
+              className={`${btn} bg-emerald-400/90 text-emerald-950 shadow-[0_8px_20px_-8px_rgba(52,211,153,0.6)] hover:bg-emerald-300`}
             >
               {busy === "confirm" ? "…" : "Approve"}
             </button>
             <button
               onClick={() => act("decline")}
               disabled={busy !== null}
-              className={`${btn} border border-white/15 text-white/70 hover:bg-white/5`}
+              className={`${btn} border border-white/12 bg-white/4 text-white/70 hover:bg-white/10 hover:text-white`}
             >
               {busy === "decline" ? "…" : "Decline"}
             </button>

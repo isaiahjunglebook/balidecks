@@ -1,3 +1,5 @@
+import { formatUsd, DEPOSIT_CENTS } from "@/lib/pricing";
+
 const GEAR = [
   {
     name: "2× Pioneer CDJ-3000",
@@ -19,43 +21,42 @@ const GEAR = [
 
 const INCLUDED = [
   "Delivered to your villa or house",
-  "Fully set up & installed",
+  "Professionally installed & tuned",
+  "On-site tech for setup, support & teardown",
   "Ready to play on arrival",
 ];
 
 export default function EquipmentSpecs() {
   return (
-    <section className="grid gap-8 md:grid-cols-2">
-      <div>
-        <h2 className="text-sm font-semibold uppercase tracking-widest text-amber-400/80">
-          The Setup
-        </h2>
-        <ul className="mt-4 space-y-4">
+    <section className="grid gap-6 md:grid-cols-2">
+      <div className="glass rounded-[1.5rem] p-7">
+        <h2 className="eyebrow">The Setup</h2>
+        <ul className="mt-5 space-y-5">
           {GEAR.map((g) => (
-            <li key={g.name} className="border-l-2 border-amber-400/30 pl-4">
-              <p className="font-medium">{g.name}</p>
-              <p className="text-sm text-white/50">{g.detail}</p>
+            <li key={g.name} className="border-l-2 border-gold/35 pl-4">
+              <p className="font-medium tracking-tight">{g.name}</p>
+              <p className="mt-0.5 text-sm text-white/50">{g.detail}</p>
             </li>
           ))}
         </ul>
       </div>
-      <div>
-        <h2 className="text-sm font-semibold uppercase tracking-widest text-amber-400/80">
-          Every rental includes
-        </h2>
-        <ul className="mt-4 space-y-3">
+      <div className="glass rounded-[1.5rem] p-7">
+        <h2 className="eyebrow">Every booking includes</h2>
+        <ul className="mt-5 space-y-3.5">
           {INCLUDED.map((i) => (
             <li key={i} className="flex items-start gap-3 text-sm text-white/80">
-              <span className="mt-0.5 text-amber-400">✓</span>
+              <span className="mt-px flex h-5 w-5 flex-none items-center justify-center rounded-full bg-gold/15 text-[11px] text-gold">
+                ✓
+              </span>
               {i}
             </li>
           ))}
         </ul>
-        <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm">
+        <div className="mt-7 rounded-2xl border border-white/8 bg-black/25 p-5 text-sm">
           <p className="font-medium text-white/90">
-            $1,500 refundable deposit
+            {formatUsd(DEPOSIT_CENTS)} refundable deposit
           </p>
-          <p className="mt-1 text-white/50">
+          <p className="mt-1 leading-relaxed text-white/50">
             Held against damage and returned in full after pickup, gear in
             working order.
           </p>

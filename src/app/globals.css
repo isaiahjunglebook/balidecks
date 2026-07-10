@@ -1,35 +1,297 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   BaliDecks design system — "liquid glass" on black.
+   Layered translucency, soft depth, one warm champagne accent, system type.
+--------------------------------------------------------------------------- */
+
+@theme {
+  --color-gold: #e8c26a;
+  --color-gold-bright: #f2d48b;
+  --color-ink: #08080a;
+}
+
 :root {
   color-scheme: dark;
 }
 
 html,
 body {
-  background: #0a0a0b;
-  color: #ededef;
+  background: var(--color-ink);
+  color: #f2f2f4;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Segoe UI", Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* react-day-picker theming (v9) */
-.rdp-root {
-  --rdp-accent-color: #f4b942;
-  --rdp-accent-background-color: rgba(244, 185, 66, 0.15);
-  --rdp-day-width: 2.5rem;
-  --rdp-day-height: 2.5rem;
-  --rdp-day_button-width: 2.5rem;
-  --rdp-day_button-height: 2.5rem;
-  --rdp-day_button-border-radius: 0.5rem;
-  --rdp-selected-border: 2px solid #f4b942;
-  --rdp-disabled-opacity: 0.3;
+/* Ambient light — two soft glows floating behind everything. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      600px 420px at 12% -8%,
+      rgba(232, 194, 106, 0.09),
+      transparent 65%
+    ),
+    radial-gradient(
+      720px 540px at 105% 18%,
+      rgba(120, 130, 240, 0.07),
+      transparent 65%
+    ),
+    radial-gradient(
+      900px 640px at 50% 118%,
+      rgba(232, 194, 106, 0.05),
+      transparent 60%
+    );
+}
+
+::selection {
+  background: rgba(232, 194, 106, 0.3);
+}
+
+@layer components {
+  /* Frosted panel — the core surface. */
+  .glass {
+    background: linear-gradient(
+      150deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.02) 55%
+    );
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.09),
+      0 20px 50px -24px rgba(0, 0, 0, 0.75);
+  }
+
+  /* Brighter panel for focal cards (login, totals). */
+  .glass-bright {
+    background: linear-gradient(
+      150deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.03) 60%
+    );
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 24px 70px -28px rgba(0, 0, 0, 0.85);
+  }
+
+  /* Inset field — inputs sitting inside glass. */
+  .field {
+    width: 100%;
+    border-radius: 0.875rem;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
+  }
+  .field::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+  }
+  .field:focus {
+    border-color: rgba(232, 194, 106, 0.55);
+    background: rgba(0, 0, 0, 0.45);
+    box-shadow: 0 0 0 4px rgba(232, 194, 106, 0.12);
+  }
+
+  /* Primary action — champagne pill with a soft glow. */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: linear-gradient(180deg, #f2d48b, #e0b355);
+    color: #241a05;
+    font-weight: 600;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.45),
+      0 10px 28px -10px rgba(232, 194, 106, 0.55);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease;
+  }
+  .btn-primary:hover:not(:disabled) {
+    filter: brightness(1.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      0 14px 34px -10px rgba(232, 194, 106, 0.65);
+  }
+  .btn-primary:active:not(:disabled) {
+    transform: scale(0.985);
+  }
+  .btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* Quiet glass pill for secondary actions. */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.75);
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.09);
+    color: #fff;
+  }
+  .btn-ghost:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(232, 194, 106, 0.85);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Calendar (react-day-picker v9).
+   Doubled class selector so these always beat the library stylesheet,
+   regardless of import order.
+--------------------------------------------------------------------------- */
+
+.rdp-root.rdp-root {
+  --rdp-accent-color: var(--color-gold);
+  --rdp-accent-background-color: rgba(232, 194, 106, 0.16);
+
+  --rdp-day-width: 2.65rem;
+  --rdp-day-height: 2.65rem;
+  --rdp-day_button-width: 2.45rem;
+  --rdp-day_button-height: 2.45rem;
+  --rdp-day_button-border-radius: 9999px;
+  --rdp-day_button-border: 2px solid transparent;
+
+  --rdp-selected-border: 2px solid rgba(232, 194, 106, 0.9);
+  --rdp-disabled-opacity: 0.28;
+  --rdp-outside-opacity: 0.35;
+  --rdp-today-color: var(--color-gold-bright);
+
+  --rdp-nav_button-width: 2.1rem;
+  --rdp-nav_button-height: 2.1rem;
+
+  /* Range band: translucent gold, readable white text. */
+  --rdp-range_middle-background-color: rgba(232, 194, 106, 0.16);
+  --rdp-range_middle-color: #fff;
+
+  /* Range endpoints: solid gold circle, dark text. */
+  --rdp-range_start-color: #221803;
+  --rdp-range_end-color: #221803;
+  --rdp-range_start-date-background-color: var(--color-gold);
+  --rdp-range_end-date-background-color: var(--color-gold);
+
   margin: 0;
+  font-size: 0.875rem;
 }
 
-.rdp-day_button:hover:not([disabled]) {
-  background: rgba(255, 255, 255, 0.08);
+.rdp-root.rdp-root .rdp-month_caption {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.92);
+  padding-left: 0.25rem;
 }
 
-.rdp-disabled .rdp-day_button {
-  text-decoration: line-through;
+.rdp-root.rdp-root .rdp-weekday {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  opacity: 1;
+}
+
+.rdp-root.rdp-root .rdp-chevron {
+  fill: rgba(255, 255, 255, 0.65);
+  transition: fill 0.2s ease;
+}
+.rdp-root.rdp-root .rdp-button_previous:hover .rdp-chevron,
+.rdp-root.rdp-root .rdp-button_next:hover .rdp-chevron {
+  fill: var(--color-gold);
+}
+
+/* Keep selected dates the same size as everything else — calm, not shouty. */
+.rdp-root.rdp-root .rdp-selected {
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.rdp-root.rdp-root .rdp-day_button {
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+.rdp-root.rdp-root .rdp-day_button:hover:not([disabled]) {
+  background: rgba(255, 255, 255, 0.09);
+}
+.rdp-root.rdp-root .rdp-range_start .rdp-day_button,
+.rdp-root.rdp-root .rdp-range_end .rdp-day_button {
+  font-weight: 700;
+  box-shadow: 0 6px 18px -6px rgba(232, 194, 106, 0.55);
+}
+.rdp-root.rdp-root .rdp-range_start .rdp-day_button:hover,
+.rdp-root.rdp-root .rdp-range_end .rdp-day_button:hover {
+  background: var(--color-gold);
+}
+.rdp-root.rdp-root .rdp-range_middle .rdp-day_button:hover {
+  background: rgba(232, 194, 106, 0.28);
+}
+
+/* Past / unavailable dates fade back. */
+.rdp-root.rdp-root .rdp-disabled .rdp-day_button {
   cursor: not-allowed;
+}
+
+/* Booked dates: struck through so they read as taken, not just faded. */
+.rdp-root.rdp-root .rdp-booked .rdp-day_button {
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Peak-rate nights: a small gold tick under the date. */
+.rdp-root.rdp-root .rdp-prime:not(.rdp-disabled) .rdp-day_button {
+  position: relative;
+}
+.rdp-root.rdp-root .rdp-prime:not(.rdp-disabled) .rdp-day_button::after {
+  content: "";
+  position: absolute;
+  bottom: 0.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.22rem;
+  height: 0.22rem;
+  border-radius: 9999px;
+  background: rgba(232, 194, 106, 0.85);
+}
+.rdp-root.rdp-root .rdp-range_start .rdp-day_button::after,
+.rdp-root.rdp-root .rdp-range_end .rdp-day_button::after {
+  background: rgba(34, 24, 3, 0.7);
 }

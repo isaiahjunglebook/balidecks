@@ -17,6 +17,11 @@ function isNeon(url: string): boolean {
   return url.includes("neon.tech") || url.includes("neon.build");
 }
 
+/** Whether a database is configured. Callers can degrade gracefully if not. */
+export function hasDatabase(): boolean {
+  return Boolean(process.env.DATABASE_URL);
+}
+
 function getDb(): Db {
   if (_db) return _db;
   const connectionString = process.env.DATABASE_URL;

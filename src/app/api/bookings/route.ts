@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
+import { db, hasDatabase } from "@/db";
 import { bookings } from "@/db/schema";
 import { bookingInputSchema } from "@/lib/validation";
 import { findOverlapping, SOFT_HOLD_STATUSES } from "@/lib/availability";
@@ -9,6 +9,16 @@ import { todayString } from "@/lib/dates";
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
+  if (!hasDatabase()) {
+    return NextResponse.json(
+      {
+        error:
+          "The booking system is still being set up. Please contact the owner directly to book.",
+      },
+      { status: 503 },
+    );
+  }
+
   let json: unknown;
   try {
     json = await req.json();

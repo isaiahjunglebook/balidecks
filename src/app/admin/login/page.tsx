@@ -7,7 +7,6 @@ export default function AdminLoginPage() {
       redirectTo="/admin"
       title="Admin"
       subtitle="Owner access — manage booking requests."
-      accent="slate"
     />
   );
 }

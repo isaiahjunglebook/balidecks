@@ -5,9 +5,8 @@ export default function ClientLoginPage() {
     <PasswordGate
       endpoint="/api/auth/client-login"
       redirectTo="/"
-      title="BaliDecks"
+      title="Welcome"
       subtitle="Private booking portal — enter your access password."
-      accent="gold"
     />
   );
 }

@@ -1,35 +1,68 @@
-const TIERS = [
-  { label: "Day", price: "$100", per: "per day", note: "Perfect for a single event or session." },
-  { label: "Week", price: "$1,000", per: "per week", note: "Great for a residency or a longer stay." },
-  { label: "Month", price: "$3,000", per: "per month", note: "Best value for extended bookings." },
-];
+import { formatUsd, nightRateCents, PRICING } from "@/lib/pricing";
 
 export default function PricingTiers() {
+  const standard = formatUsd(nightRateCents("standard"));
+  const offpeak = formatUsd(nightRateCents("offpeak"));
+  const prime = formatUsd(nightRateCents("prime"));
+  const weekly = formatUsd(PRICING.weeklyCents);
+  const monthly = formatUsd(PRICING.monthlyCents);
+
+  const tiers = [
+    {
+      label: "Nightly",
+      price: standard,
+      per: "per night",
+      note: `Off-peak weekdays ${offpeak}. Peak nights — Friday & Saturday in high season — ${prime}.`,
+    },
+    {
+      label: "Weekly",
+      price: weekly,
+      per: "7 nights",
+      highlight: true,
+      note: "Around $179 a night — two nights free versus the nightly rate. Prepaid, one villa.",
+    },
+    {
+      label: "Monthly",
+      price: monthly,
+      per: "30 nights",
+      note: "Around $117 a night for the full residency. Prepaid, one location.",
+    },
+  ];
+
   return (
     <section>
-      <h2 className="text-sm font-semibold uppercase tracking-widest text-amber-400/80">
-        Pricing
-      </h2>
-      <div className="mt-4 grid gap-4 sm:grid-cols-3">
-        {TIERS.map((t) => (
+      <h2 className="eyebrow">Pricing</h2>
+      <div className="mt-5 grid gap-4 sm:grid-cols-3">
+        {tiers.map((t) => (
           <div
             key={t.label}
-            className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+            className={`glass relative rounded-[1.5rem] p-6 ${
+              t.highlight ? "ring-1 ring-gold/30" : ""
+            }`}
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/40">
+            {t.highlight && (
+              <span className="absolute right-5 top-5 rounded-full bg-gold/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest text-gold">
+                Popular
+              </span>
+            )}
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40">
               {t.label}
             </p>
-            <p className="mt-2 text-3xl font-semibold tracking-tight">
+            <p className="mt-3 text-4xl font-semibold tracking-tight">
               {t.price}
             </p>
-            <p className="text-sm text-white/40">{t.per}</p>
-            <p className="mt-3 text-sm text-white/60">{t.note}</p>
+            <p className="mt-1 text-sm text-white/40">{t.per}</p>
+            <p className="mt-4 text-sm leading-relaxed text-white/55">
+              {t.note}
+            </p>
           </div>
         ))}
       </div>
-      <p className="mt-3 text-xs text-white/40">
-        Delivery, setup & installation included. Final price is confirmed by the
-        owner after your request.
+      <p className="mt-4 text-xs leading-relaxed text-white/40">
+        Every booking includes delivery, professional install and an on-site
+        tech. Peak nights are marked with a gold dot on the calendar. Lights
+        &amp; speaker packages quoted separately. Final price confirmed by the
+        owner.
       </p>
     </section>
   );
